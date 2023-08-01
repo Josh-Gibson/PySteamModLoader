@@ -1,3 +1,5 @@
+#2023 
+
 
 import os;
 import shutil;
@@ -7,7 +9,7 @@ from PyQt5.QtGui import QPixmap;
 import sys;
 
 
-
+#paths to Ravenfield Mod folder and saved folder
 list = 'C:/Program Files (x86)/Steam/steamapps/workshop/content/636480'
 destination = 'C:/Program Files (x86)/Steam/steamapps/workshop/content/636480/saved'
 
@@ -17,16 +19,8 @@ reset = '\u001b[0m';
 
 os.system("cls");
 
-def clearMods():
-
-    print("Moving files")
-
-    for path, dirs, files in os.walk(list):
-        for d in dirs:
-            dest = shutil.move(list + "/" + d, destination); 
-
-    print("done!")
-
+#Gets folder mod is in (ID)
+#Type is either 'LOADED or 'SAVED' to determine which path to check
 def getModID(modName, type):
 
     dirTarget = "";
@@ -93,6 +87,8 @@ def loadAll(modList):
             for d in dirs:                            
                 if(os.path.isfile(list + "/" + d + "/" + mod)):
                     loadMod(mod, d);
+
+#Loads the icon png of the selected mod
 def loadImg(id, type):
     path = "";
     if(type == "LOADED"):
@@ -105,7 +101,7 @@ def loadImg(id, type):
     img = img.scaled(256, 256);
     return img
     
-
+#Application class and GUI
 class App(QWidget):
 
     loadedMods = None
@@ -125,7 +121,7 @@ class App(QWidget):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
         
-        self.modIcon = QLabel("sex", self)
+        self.modIcon = QLabel("icon.png", self)
         self.modIcon.setFixedSize(256, 256);
         self.modIcon.move(450,20);
         
@@ -133,17 +129,17 @@ class App(QWidget):
         self.loadedMods.setFixedSize(400, 400)
         self.loadedMods.clicked.connect(self.show_loaded_icon)
         loadList = getLoaded();
-        #os.system("cls");
-        
+
+        #populate QList with currently loaded mods
         for mod in loadList:
             QListWidgetItem(mod, self.loadedMods)
-        #itemsTextList =  [str(self.loadedMods.item(i).text()) for i in range(self.loadedMods.count())]
-        #unloadAll(itemsTextList);
 
         self.savedMods = QListWidget()
         self.savedMods.setFixedSize(400, 400)
         self.savedMods.clicked.connect(self.show_saved_icon)
         savedList = getSaved();
+
+        #populate QList with currently unloaded mods
         for mod in savedList:
             QListWidgetItem(mod, self.savedMods)
         
@@ -163,12 +159,12 @@ class App(QWidget):
         self.show()
 
     @pyqtSlot()
-    def btn_load(self):
+    def btn_load(self):        #load selected mod
         item = self.savedMods.currentItem()
         self.loadedMods.addItem(item.text());
         self.savedMods.takeItem(self.savedMods.row(item))
         loadMod(item.text(),getModID(item.text(), "SAVED"));
-    def btn_unload(self):
+    def btn_unload(self):        #unload selected mod
         item = self.loadedMods.currentItem()
         if(item == None):
             return;
@@ -176,13 +172,13 @@ class App(QWidget):
         self.loadedMods.takeItem(self.loadedMods.row(item))
         unloadMod(item.text(),getModID(item.text(), "LOADED"));
         
-    def show_saved_icon(self, savedMods):
+    def show_saved_icon(self, savedMods):    #show icon.png of current mod selected (unloaded)
         item = self.savedMods.currentItem()
         print(item.text())
         
         self.modIcon.setPixmap(loadImg(getModID(item.text(),"SAVED"), "SAVED"))
         
-    def show_loaded_icon(self, loadedMods):
+    def show_loaded_icon(self, loadedMods):    #show icon.png of current mod selected (loaded)
         item = self.loadedMods.currentItem()
         print(item.text())
         

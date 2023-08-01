@@ -1,7 +1,9 @@
-# PySteamModLoader
+  # PySteamModLoader
 A clunky mod loader for Ravenfield in Steam
 
 This is a janky build of a mod manager for Ravenfield.
+
+![mod](https://github.com/Josh-Gibson/PySteamModLoader/assets/22622013/19ddd864-5193-4cb7-bda4-fcad6caa39a4)
 
 <b>Situation:</b>
 - Ravenfield loads in all mods at once. This becomes a problem when someone (such as myself) has downloaded several, several mods, and they are all loaded up in the RAM. This makes the game slow and choppy, and not the most fun to play
@@ -18,5 +20,4 @@ Originally this was all done in the command line. With PyQt5, I was able to crea
 
 <b>Dependencies:</b>
 - This was coded in core python, but PyQt5 is the only external dependency
-
 

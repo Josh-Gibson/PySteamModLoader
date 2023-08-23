@@ -8,6 +8,7 @@ from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QPixmap;
 import sys;
 
+#Hello I have updated it from the local holy short!!1!
 
 #paths to Ravenfield Mod folder and saved folder
 list = 'C:/Program Files (x86)/Steam/steamapps/workshop/content/636480'

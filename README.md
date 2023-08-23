@@ -1,7 +1,7 @@
   # PySteamModLoader
 A clunky mod loader for Ravenfield in Steam
 
-This is a janky build of a mod manager for Ravenfield.
+This is a janky build of a mod manager for Ravenfield. 
 
 ![mod](https://github.com/Josh-Gibson/PySteamModLoader/assets/22622013/19ddd864-5193-4cb7-bda4-fcad6caa39a4)
 
